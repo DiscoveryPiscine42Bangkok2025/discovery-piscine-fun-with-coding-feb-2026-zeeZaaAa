@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>It's over 9000</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .calc-container {
+            border: 2px solid #333;
+            padding: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calc-container">
+        <input type="text" id="left" placeholder="Value 1">
+        
+        <select id="operator">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+            <option value="%">%</option>
+        </select>
+
+        <input type="text" id="right" placeholder="Value 2">
+        
+        <input type="submit" value="Try me!" onclick="calculate()">
+    </div>
+
+    <script>
+        setInterval(function() {
+            alert("Please, use me...");
+        }, 30000);
+
+        function calculate() {
+            const leftVal = document.getElementById('left').value;
+            const rightVal = document.getElementById('right').value;
+            const op = document.getElementById('operator').value;
+
+            if (!isPositiveInteger(leftVal) || !isPositiveInteger(rightVal)) {
+                alert("Error :(");
+                return;
+            }
+
+            const n1 = parseInt(leftVal);
+            const n2 = parseInt(rightVal);
+            let result;
+
+            if ((op === '/' || op === '%') && n2 === 0) {
+                const msg = "It's over 9000!";
+                console.log(msg);
+                alert(msg);
+                return;
+            }
+
+            switch (op) {
+                case '+': result = n1 + n2; break;
+                case '-': result = n1 - n2; break;
+                case '*': result = n1 * n2; break;
+                case '/': result = n1 / n2; break;
+                case '%': result = n1 % n2; break;
+            }
+
+            console.log(result);
+            alert(result);
+        }
+
+        function isPositiveInteger(str) {
+            return /^\d+$/.test(str);
+        }
+    </script>
+</body>
+</html>
